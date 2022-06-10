@@ -1,30 +1,12 @@
-<!DOCTYPE html>
-<html lang="pl">
-    <head>
-        <meta charset="UTF-8">
-        <title>Blok dla programistów</title>
-    </head>
-    <body>
-        <div>
-            <h1>Tutaj jest nagłówek h1</h1>
-            <h2>Tutaj jest nagłówek h2</h2>
-            <h3>Tutaj jest nagłówek h3</h3>
-            <h4>Tutaj jest nagłówek h4</h4>
-        </div>
-        <div>
-            <ul>
-                <li>Element listy numer 1</li>
-                <li>Element listy numer 2</li>
-                <li>Element listy numer 3</li>
-                <li>Element listy numer 4</li>
-                <li>Element listy numer 5</li>
-            </ul>
-        </div>
-        <div>
-            <p>To jest akapit</p>
-            <em>Wyróżniony tekst</em><br>
-            <strong>Pogrubiony tekst</strong><br>
-            <a href="https://www.youtube.com/watch?v=cGiuEle0uvg">youTube</a>
-        </div>
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+    {% block content %}
+        {% for post in posts %}
+            <div class="post">
+                <div class="date">
+                    <p>Opublikowano: {{post.publish_date}}</p>
+                </div>
+                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h2>
+                <em>{{post.text|linebreaksbr}}</em>
+            </div>
+        {% endfor %}
+    {% endblock %}
